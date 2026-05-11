@@ -3,9 +3,9 @@ import Header from './Header/Header';
 import Profile from './Profile/Profile';
 import './Home.css';
 
-export default function Home() {
+export default function Home(props) {
   return (
-    <div className="home-container">
+    <div className="home-container screen-visible" id={props.id || ""}>
       <Header />
       <Profile />
     </div>

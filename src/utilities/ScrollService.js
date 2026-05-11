@@ -1,4 +1,5 @@
 import {TOTAL_SCREENS} from './commonUtils';
+import Animations from './Animations';
 import{Subject} from 'rxjs';
 
 export default class ScrollService {
@@ -8,6 +9,7 @@ export default class ScrollService {
     static currentScreenFadeIn = new Subject()
 
     constructor() {
+        this.prevScrollY = window.scrollY;
         window.addEventListener('scroll', this.checkCurrentScreenUnderViewport);
     }
 
@@ -41,32 +43,43 @@ export default class ScrollService {
         }
     }
 
-    checkCurrentScreenUnderViewport = (event) => {
-        if(!event || Object.keys(event).length < 1)
-        return;
+    checkCurrentScreenUnderViewport = () => {
+        this.prevScrollY = window.scrollY;
+        let currentScreen = null;
+        let minDistance = Infinity;
+
         for(let screen of TOTAL_SCREENS) {
             let screenFromDOM = document.getElementById(screen.screen_name);
-            if(!screenFromDOM)
-            continue;
+            if(!screenFromDOM) continue;
 
-            let fullyVisible = this.isElementView(screenFromDOM, "complete");
-            let partiallyVissible = this.isElementView(screenFromDOM, "partial")
+            let partiallyVissible = this.isElementView(screenFromDOM, "partial");
+            let rec = screenFromDOM.getBoundingClientRect();
 
-            if(fullyVisible || partiallyVissible) {
-                if(partiallyVissible && !screen.alreadyRendered) {
-                    ScrollService.currentScreenFadeIn.next({
-                        fadeInScreen: screen.screen_name
-                    });
-                    screen['alreadyRendered'] = true;
-                    break;
-                }
-                if (fullyVisible) {
-                    ScrollService.currentScreenBroadCaster.next({
-                        screenInView: screen.screen_name,
-                    });
-                    break;
-                }
+            if(partiallyVissible && !screen.alreadyRendered) {
+                ScrollService.currentScreenFadeIn.next({
+                    fadeInScreen: screen.screen_name
+                });
+                screen['alreadyRendered'] = true;
             }
+
+            // Reset when fully off-screen so the section re-animates on next visit
+            if(!partiallyVissible && screen.alreadyRendered) {
+                screen['alreadyRendered'] = false;
+                const isAbove = rec.bottom < 0;
+                Animations.animations.resetScreen(screen.screen_name, isAbove);
+            }
+
+            let distanceFromTop = Math.abs(rec.top);
+            if(partiallyVissible && distanceFromTop < minDistance) {
+                minDistance = distanceFromTop;
+                currentScreen = screen.screen_name;
+            }
+        }
+
+        if(currentScreen) {
+            ScrollService.currentScreenBroadCaster.next({
+                screenInView: currentScreen,
+            });
         }
     }
 }

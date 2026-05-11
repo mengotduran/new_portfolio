@@ -7,13 +7,13 @@ import "./Resume.css";
 export default function Resume(props) {
   // const Resume = (props) => {
     
-  let fadeInScreenHandler = (screen) => {
-    if (screen.fadeInScreen !== props.id) return;
-    Animations.animations.fadeInScreen(props.id);
-  };
-
-  const fadeInSubscription =
-    ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
+  useEffect(() => {
+    const sub = ScrollService.currentScreenFadeIn.subscribe((screen) => {
+      if (screen.fadeInScreen !== props.id) return;
+      Animations.animations.fadeInScreen(props.id);
+    });
+    return () => sub.unsubscribe();
+  }, [props.id]);
 
   /* STATES */
   const [selectedBulletIndex, setSelectedBulletIndex] = useState(0);
@@ -55,15 +55,18 @@ export default function Resume(props) {
 
   //here we have
   const programmingSkillsDetails = [
-    { skill: "JavaScript", ratingPercentage: 85 },
-    { skill: "React JS", ratingPercentage: 85 },
-    { skill: "Next Js", ratingPercentage: 85 },
-    { skill: "TypeScript", ratingPercentage: 89 },
-    { skill: "Amateur PHP", ratingPercentage: 70 },
-    { skill: "Core JavaScript", ratingPercentage: 80 },
-    { skill: "HTML", ratingPercentage: 80 },
-    { skill: "Tailwind CSS)", ratingPercentage: 89 },
-    { skill: "CSS", ratingPercentage: 80 },
+    { skill: "JavaScript",        ratingPercentage: 85 },
+    { skill: "React JS",          ratingPercentage: 85 },
+    { skill: "Next.js",           ratingPercentage: 85 },
+    { skill: "TypeScript",        ratingPercentage: 89 },
+    { skill: "HTML & CSS",        ratingPercentage: 90 },
+    { skill: "Tailwind CSS",      ratingPercentage: 89 },
+    { skill: "Artificial Intelligence", ratingPercentage: 72 },
+    { skill: "Machine Learning",  ratingPercentage: 68 },
+    { skill: "C++",               ratingPercentage: 65 },
+    { skill: "C",                 ratingPercentage: 70 },
+    { skill: "PHP",               ratingPercentage: 65 },
+    { skill: "Node.js",           ratingPercentage: 70 },
   ];
 
   const projectsDetails = [
@@ -160,7 +163,7 @@ export default function Resume(props) {
           <span>{skill.skill}</span>
           <div className="skill-percentage">
             <div
-              style={{ width: skill.ratingPercentage + "%" }}
+              style={{ '--pct': skill.ratingPercentage + '%', animationDelay: `${index * 0.08}s` }}
               className="active-percentage-bar"
             ></div>
           </div>
@@ -200,7 +203,7 @@ export default function Resume(props) {
   ];
 
   const handleCarousal = (index) => {
-    let offsetHeight = 360;
+    let offsetHeight = 400;
 
     let newCarousalOffset = {
       style: { transform: "translateY(" + index * offsetHeight * -1 + "px)" },
@@ -235,17 +238,18 @@ export default function Resume(props) {
         style={carousalOffsetStyle.style}
         className="resume-details-carousal"
       >
-        {resumeDetails.map((ResumeDetail) => ResumeDetail)}
+        {resumeDetails.map((ResumeDetail, index) => (
+          <div
+            key={index}
+            className={`resume-slide${index === selectedBulletIndex ? " active" : ""}`}
+          >
+            {ResumeDetail}
+          </div>
+        ))}
       </div>
     );
   };
 
-  useEffect(() => {
-    return () => {
-      /* UNSUBSCRIBE THE SUBSCRIPTIONS */
-      fadeInSubscription.unsubscribe();
-    };
-  }, [fadeInSubscription]);
 
   return (
     <div className="resume-container screen-container fade-in" id={props.id || ""}>

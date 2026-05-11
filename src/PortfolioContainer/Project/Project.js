@@ -20,6 +20,8 @@ import reviews from "../../../src/Img/Testimonial/reviews.png";
 import Eze from "../../../src/Img/Testimonial/eze.png";
 import miq from "../../../src/Img/Testimonial/dina.png";
 import sema01 from "../../../src/Img/Testimonial/sema.png";
+import ecommerce from "../../../src/Img/Testimonial/ecommerce.png";
+import chatbot from "../../../src/Img/Testimonial/chatbot.png";
 
 const projects = [
   {
@@ -28,23 +30,37 @@ const projects = [
     description: "Professional client project",
     badge: "Client Work",
     image: miq,
-    live: "https://www.kaeyros.org/de",
+    live: "https://www.miq.nrw",
+  },
+  // {
+  //   id: "sema",
+  //   title: "SEMA",
+  //   description: "Professional client project",
+  //   badge: "Client Work",
+  //   image: sema01,
+  //   live: "https://sema.sem-a.com/y",
+  // },
+  // {
+  //   id: "eze",
+  //   title: "Eze",
+  //   description: "Professional client project",
+  //   badge: "Client Work",
+  //   image: Eze,
+  //   live: "https://eze.ink/",
+  // },
+  {
+    id: "chatbot",
+    title: "AI Chatbot Widget",
+    description: "Real-time AI chatbot that collects user data and answers questions automatically",
+    image: chatbot,
+    live: "https://chatbot-widget-ten-bay.vercel.app/",
   },
   {
-    id: "sema",
-    title: "SEMA",
-    description: "Professional client project",
-    badge: "Client Work",
-    image: sema01,
-    live: "https://sema.sem-a.com/y",
-  },
-  {
-    id: "eze",
-    title: "Eze",
-    description: "Professional client project",
-    badge: "Client Work",
-    image: Eze,
-    live: "https://eze.ink/",
+    id: "ecommerce",
+    title: "E-Commerce Cart",
+    description: "Shopping cart app with product management and checkout",
+    image: ecommerce,
+    live: "https://ecommercesale0.netlify.app/",
   },
   {
     id: "cocktail",

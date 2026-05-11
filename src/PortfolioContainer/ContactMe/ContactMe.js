@@ -1,13 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import Typical from "react-typical";
 import "./ContactMe.css";
-import emailjs from '@emailjs/browser';
 
 import imgBack from "../../../src/images/mailz.jpeg";
 import ScreenHeading from "../../utilities/ScreenHeading/ScreenHeading";
 import ScrollService from "../../utilities/ScrollService";
 import Animations from "../../utilities/Animations";
-import toast, {Toaster} from "react-hot-toast";
+import { toast } from "react-toastify";
 
 const Result = () => {
   return (
@@ -18,13 +17,13 @@ const Result = () => {
 export default function ContactMe(props) {
   const form = useRef();
   const [loading, setLoading] = useState(false)
-  let fadeInScreenHandler = (screen) => {
-    if (screen.fadeInScreen !== props.id) return;
-    Animations.animations.fadeInScreen(props.id);
-  };
-
-  const fadeInSubscription =
-    ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
+  useEffect(() => {
+    const sub = ScrollService.currentScreenFadeIn.subscribe((screen) => {
+      if (screen.fadeInScreen !== props.id) return;
+      Animations.animations.fadeInScreen(props.id);
+    });
+    return () => sub.unsubscribe();
+  }, [props.id]);
   const [result, showResult] = useState(false);
 
   // const handleSubmit = (e) => {
@@ -52,33 +51,34 @@ export default function ContactMe(props) {
   //   })
   // }
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
-    emailjs
-      .sendForm('service_zpmw66h', 'template_u2ayfxa', form.current, 'RH8v6llJe5ihhMrv6')
-      .then(
-        (response) => {
-          toast.success('Message Sent Successfully')
-          setLoading(false)
-          console.log('SUCCESS!', response);
-        },
-        (error) => {
-          toast.error('Please Check your connection and try again')
-          setLoading(false)
-          console.log('FAILED...', error.text);
-          console.log('FAILED..., message not sent');
-        },
-      );
-      e.target.reset();
-      showResult(true);
+    try {
+      const response = await fetch('https://formspree.io/f/xvzllond', {
+        method: 'POST',
+        body: new FormData(form.current),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        toast.success('Message was submitted');
+        e.target.reset();
+        showResult(true);
+      } else {
+        toast.error('Message was not submitted');
+      }
+    } catch {
+      toast.error('Message was not submitted');
+    }
+
+    setLoading(false);
   };
 
 
   return (
     <div className="main-container fade-in" id={props.id || ""}>
-      <Toaster />
       <ScreenHeading subHeading={"Lets Keep In Touch"} title={"Contact Me"} />
       <div className="central-form">
         <div className="col">
@@ -109,7 +109,7 @@ export default function ContactMe(props) {
             <input type="text" name="user_name" required />
 
             <label>Email</label>
-            <input type="email" name="user_email" required/>
+            <input type="email" name="email" required/>
 
             <label>Message</label>
             <textarea type="text" name="message" required />

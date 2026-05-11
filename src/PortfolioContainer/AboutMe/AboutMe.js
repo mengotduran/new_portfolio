@@ -4,68 +4,53 @@ import ScrollService from "../../utilities/ScrollService";
 import Animations from "../../utilities/Animations";
 import "./AboutMe.css";
 
+const highlights = [
+  "Front End Developer",
+  "Interactive UI from design specs",
+  "React & Next.js Applications",
+  "TypeScript & Vanilla JavaScript",
+  "Tailwind CSS & Advanced UI",
+  "Artificial Intelligence & ML Enthusiast",
+];
+
+const description =
+  "Front End Developer with a strong background in Vanilla JavaScript and a knack for building high-performance web applications. Passionate about clean code, intuitive UI, and delivering production-ready solutions that make a real impact.";
+
 export default function AboutMe(props) {
-  let fadeInScreenHandler = (screen) => {
-    if (screen.fadeInScreen !== props.id) return;
-    Animations.animations.fadeInScreen(props.id);
-  };
-
-  const fadeInSubscription =
-    ScrollService.currentScreenFadeIn.subscribe(fadeInScreenHandler);
-
-  const SCREEN_CONSTANTS = {
-    description:
-      "Front End Developer with Strong background knowledge of Vanilla Javascript, along with a knack of building applications with utmost efficiency. Strong professional skills willing to be an asset for your organization.",
-    highlights: {
-      bullets: [
-        "Front End Developer",
-        "Interactive Front End as per the design",
-        "React and Vanilla Javascript",
-        "CSS and Advanced UI",
-        "Next Js Applications",
-        "TypeScript",
-      ],
-      heading: "Here are a Few Highlights:",
-    },
-  };
-
-  const renderHighlights = () => {
-    return SCREEN_CONSTANTS.highlights.bullets.map((value, i) => (
-      <div className="highlight" key={i}>
-        {/* <div className="sec-highlight"></div> */}
-        <div className="highlight-blob"></div>
-            <span>{value}</span>
-      </div>
-    ));
-  };
+  useEffect(() => {
+    const sub = ScrollService.currentScreenFadeIn.subscribe((screen) => {
+      if (screen.fadeInScreen !== props.id) return;
+      Animations.animations.fadeInScreen(props.id);
+    });
+    return () => sub.unsubscribe();
+  }, [props.id]);
 
   return (
-    <div
-      className="about-me-container screen-container fade-in"
-      id={props.id || ""}
-    >
+    <div className="about-me-container screen-container fade-in" id={props.id || ""}>
       <div className="about-me-parent">
-        <ScreenHeading title={"About Me"} subHeading={"Why choose Me?"} />
+        <ScreenHeading title={"About Me"} subHeading={"Why Choose Me?"} />
         <div className="about-me-card">
-          <div className="about-me-profile"></div>
+          <div className="about-me-profile" />
           <div className="about-me-details">
-            <span className="about-me-description">
-              {SCREEN_CONSTANTS.description}
-            </span>
+            <span className="about-me-description">{description}</span>
             <div className="about-me-highlights">
-              <div className="highlight-heading">
-                <span>{SCREEN_CONSTANTS.highlights.heading}</span>
-              </div>
-              {renderHighlights()}
+              <div className="highlight-heading">Here are a few highlights</div>
+              {highlights.map((item, i) => (
+                <div className="highlight" key={i}>
+                  <div className="highlight-blob" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
             <div className="about-me-options">
-              <button className="btn primary-btn" 
-              onClick={() => ScrollService.scrollHandler.scrollToHireMe()}>
-                {""}
-                Hire Me{" "}
+              <button
+                className="btn highlighted-btn"
+                onClick={() => ScrollService.scrollHandler.scrollToHireMe()}
+              >
+                Hire Me
               </button>
-              <a href="Duran.pdf" download="Duran duran.pdf">
-                <button className="btn highlighted-btn">Get Resume</button>
+              <a href="Mengot_Duran_CV.pdf" download="Mengot_Duran_CV.pdf">
+                <button className="btn primary-btn">Get Resume</button>
               </a>
             </div>
           </div>

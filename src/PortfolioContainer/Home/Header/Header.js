@@ -1,75 +1,114 @@
-import React, {useState} from 'react';
-import {TOTAL_SCREENS, GET_SCREEN_INDEX} from '../../../utilities/commonUtils';
+import React, { useState, useEffect } from 'react';
+import { TOTAL_SCREENS, GET_SCREEN_INDEX } from '../../../utilities/commonUtils';
 import ScrollService from '../../../utilities/ScrollService';
-// import {faBars} from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FaBar from '@/../../public/bar03.png'
+import FaBar from '@/../../public/bar03.png';
 import './Header.css';
 
+const THEME_KEY = 'portfolio-theme';
+
 export default function Header() {
-    const [selectedScreen, setSelectedScreen] = useState('Home')
-    const [activeUrl, setActiveUrl] = useState('Home')
-    const [showHeaderOptions, setShowHeaderOptions] = useState(false)
-    const updateCurrentScreen = (currentScreen) => {
-        if(!currentScreen || !currentScreen.screenInView) 
-        return;
-        let screenIndex = GET_SCREEN_INDEX(currentScreen.screenInView)
-        if(screenIndex < 0)
-        return;
-    }
+  const [activeUrl, setActiveUrl]               = useState('Home');
+  const [showHeaderOptions, setShowHeaderOptions] = useState(false);
+  const [scrolled, setScrolled]                 = useState(false);
+  const [isColor, setIsColor]                   = useState(false);
 
-    let currentScreenSubscription = ScrollService.currentScreenBroadCaster.subscribe(updateCurrentScreen) 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    const getHeaderOptions = () => {
-        return (
-            TOTAL_SCREENS.map((screen, i) => (
-                <div key={screen.screen_name} className={getHeaderOptionsClass(i, screen.screen_name)} onClick={() => switchScreen(i, screen)}>
-                    <span>{screen.screen_name}</span>
-                </div>
-            ))
-        )
-    }
+  // load saved theme on mount; default is b&w
+  useEffect(() => {
+    const saved = localStorage.getItem(THEME_KEY);
+    const color = saved === 'color';
+    setIsColor(color);
+    document.body.classList.toggle('theme-color', color);
+  }, []);
 
-    const getHeaderOptionsClass = (index, name) => {
-        let classes = "header-option";
-        if (index < TOTAL_SCREENS.length - 1) {
-            classes += " header-option-separator"; 
-        }  
-        if (activeUrl === name) {
-            classes += " selected-header-option";
-        }  
-        return classes;
-    }
+  const toggleTheme = () => {
+    const next = !isColor;
+    setIsColor(next);
+    document.body.classList.add('theme-switching');
+    document.body.classList.toggle('theme-color', next);
+    localStorage.setItem(THEME_KEY, next ? 'color' : 'bw');
+    setTimeout(() => document.body.classList.remove('theme-switching'), 500);
+  };
 
-    const switchScreen  = (index, screen) => {
-        setActiveUrl(screen.screen_name)
-        let screenComponent = document.getElementById(screen.screen_name)
-        if(!screenComponent) 
-        return;
+  useEffect(() => {
+    const sub = ScrollService.currentScreenBroadCaster.subscribe((screen) => {
+      if (!screen?.screenInView) return;
+      const idx = GET_SCREEN_INDEX(screen.screenInView);
+      if (idx >= 0) setActiveUrl(screen.screenInView);
+    });
+    return () => sub.unsubscribe();
+  }, []);
 
-        screenComponent.scrollIntoView({behavior: "smooth"})
-        setSelectedScreen(screen.screen_name);
-        setShowHeaderOptions(false);
-    };
+  const switchScreen = (screen) => {
+    setActiveUrl(screen.screen_name);
+    setShowHeaderOptions(false);
+    const el = document.getElementById(screen.screen_name);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
-    return (
-        <div>
-            <div className="header-container" onClick={() => setShowHeaderOptions(!showHeaderOptions)}>
-                <div className="header-parent">
-                    <div className='header-hamburger' onClick={() => setShowHeaderOptions(!showHeaderOptions)}>
-                        {/* <FontAwesomeIcon className='header-hamburger-bars' icon={faBars}/> */}
-                        <img src={FaBar} alt='fabar' style={{width:'30px'}}/>
-                    </div>
-                    <div className='header-logo'>
-                        <span>
-                            DURAN'S
-                        </span>
-                    </div>
-                    <div className={(showHeaderOptions) ? "header-options show-hamburger-options" : "header-options"}>
-                        {getHeaderOptions()}
-                    </div>
-                </div>
-            </div>                               
+  return (
+    <header className={`header-container${scrolled ? ' scrolled' : ''}`}>
+      <div className="header-parent">
+        <div
+          className="header-logo"
+          onClick={() => switchScreen(TOTAL_SCREENS[0])}
+        >
+          <span className="logo-text">DURAN</span>
+          <span className="logo-dot">.</span>
         </div>
-    )
+
+        {/* Desktop nav */}
+        <nav className="header-options">
+          {TOTAL_SCREENS.map((screen) => (
+            <div
+              key={screen.screen_name}
+              className={`header-option${activeUrl === screen.screen_name ? ' selected-header-option' : ''}`}
+              onClick={() => switchScreen(screen)}
+            >
+              <span>{screen.screen_name}</span>
+              <div className="nav-underline" />
+            </div>
+          ))}
+        </nav>
+
+        {/* Theme toggle */}
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          <span className="theme-toggle-track">
+            <span className={`theme-toggle-thumb${isColor ? ' color' : ''}`} />
+          </span>
+          <span className="theme-toggle-label">{isColor ? 'Color' : 'B&W'}</span>
+        </button>
+
+        {/* Hamburger */}
+        <button
+          className="header-hamburger"
+          onClick={() => setShowHeaderOptions(!showHeaderOptions)}
+          aria-label="Toggle menu"
+        >
+          <img src={FaBar} alt="menu" style={{ width: '28px', filter: 'invert(1)' }} />
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div className={`mobile-drawer${showHeaderOptions ? ' open' : ''}`}>
+        {TOTAL_SCREENS.map((screen) => (
+          <div
+            key={screen.screen_name}
+            className={`mobile-nav-item${activeUrl === screen.screen_name ? ' active' : ''}`}
+            onClick={() => switchScreen(screen)}
+          >
+            {screen.screen_name}
+          </div>
+        ))}
+      </div>
+      {showHeaderOptions && (
+        <div className="drawer-backdrop" onClick={() => setShowHeaderOptions(false)} />
+      )}
+    </header>
+  );
 }

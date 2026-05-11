@@ -1,118 +1,139 @@
 .about-me-container {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    margin:50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0 60px;
+  background: #1f2235;
 }
 
 .about-me-parent {
-    max-width:1000px;
-    width: 70%;
-    margin: 0 auto;
+  max-width: 1000px;
+  width: 88%;
+  margin: 0 auto;
 }
 
 .about-me-card {
-    display: flex;
-    width:100%;
-    box-shadow:0px 0px 20px -2px #1f2235;
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #252a40;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.05);
+  opacity: 0;
+  transform: translateY(40px);
 }
 
+.screen-visible .about-me-card {
+  animation: scaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* Left: photo panel */
 .about-me-profile {
-    width: 50%;
-    background-image: url(../../assets/AboutMe/me01.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 42%;
+  min-height: 400px;
+  background-image: url(../../assets/AboutMe/me01.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  position: relative;
 }
 
+.about-me-profile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 70%, #252a40 100%);
+}
+
+/* Right: content */
 .about-me-details {
-    width: 48%;
-    text-align: Justify;
-    padding: 30px;
+  flex: 1;
+  padding: 36px 36px 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .about-me-description {
-    font-size: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.65);
+  text-align: left;
 }
 
 .about-me-highlights {
-    /* margin: 90px 0; */
-    margin: 110px 0 60px 0;
+  margin: 28px 0;
 }
 
 .highlight-heading {
-    font-family: "Poppins Bold";
-    font-size: 14px;
-    margin: 0 0 5px 0;
+  font-family: "Poppins Bold", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
 .highlight {
-    display: flex;
-    align-items: center;
-    margin: 5px 0; 
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin: 9px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.2s;
+  opacity: 0;
+  transform: translateX(-30px);
 }
+
+.screen-visible .highlight {
+  animation: slideInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.screen-visible .highlight:nth-child(1) { animation-delay: 0.2s; }
+.screen-visible .highlight:nth-child(2) { animation-delay: 0.32s; }
+.screen-visible .highlight:nth-child(3) { animation-delay: 0.44s; }
+.screen-visible .highlight:nth-child(4) { animation-delay: 0.56s; }
+.screen-visible .highlight:nth-child(5) { animation-delay: 0.68s; }
+.screen-visible .highlight:nth-child(6) { animation-delay: 0.80s; }
+
+.highlight:hover { color: #fff; }
 
 .highlight-blob {
-    height: 12px;
-    width: 12px;
-    margin: 0 10px 0 0;
-    background-color: #ff5823;
-    border-radius: 50%;
+  height: 8px;
+  width: 8px;
+  margin-right: 12px;
+  background: #FF5823;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(255,88,35,0.5);
+  transition: transform 0.2s;
 }
 
-.about-me-options .highlighted-btn {
-    margin: 0 0 0 30px;
+.highlight:hover .highlight-blob { transform: scale(1.4); }
+
+.about-me-options {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
 }
 
-@media(max-width:1110px) {
-    .about-me-parent {
-        width: 88%;
-    }
-
-    .about-me-details {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .about-me-highlights {
-        margin: 20px;
-    }
-
-    .highlight span, .highlight-heading, .about-me-description {
-        font-size: 18px;
-    }
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .about-me-profile { width: 36%; min-height: 340px; }
+  .about-me-details { padding: 28px; }
 }
 
-@media(max-width: 898px) {
-    .about-me-profile {
-        display: none;
-    }
-
-    .about-me-details {
-        width: 100%;
-    }
+@media (max-width: 680px) {
+  .about-me-card { flex-direction: column; }
+  .about-me-profile { width: 100%; min-height: 240px; }
+  .about-me-profile::after {
+    background: linear-gradient(to bottom, transparent 60%, #252a40 100%);
+  }
+  .about-me-details { padding: 24px; }
 }
 
-@media(max-width:466px) {
-    .about-me-options {
-        display: flex;
-        flex-direction: column;
-    }
-    .about-me-options .highlighted-btn {
-        margin: 24px 0 0 0 !important;
-    }
-
-    .about-me-options {
-        width: 100%;
-    }
-
-    .about-me-options button {
-        width: 100%;
-    }
-
-    .highlight span, .highlight-heading, .about-me-description {
-        font-size: 12px;
-    }
-} 
+@media (max-width: 440px) {
+  .about-me-parent { width: 94%; }
+  .about-me-options { flex-direction: column; }
+  .about-me-options .btn { width: 100%; }
+}

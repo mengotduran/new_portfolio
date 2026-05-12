@@ -8,12 +8,6 @@ import ScrollService from "../../utilities/ScrollService";
 import Animations from "../../utilities/Animations";
 import { toast } from "react-toastify";
 
-const Result = () => {
-  return (
-    <p class="msg-status"> Your Message Has been successfully sent. I will contact you soon</p>
-  )
-}
-
 export default function ContactMe(props) {
   const form = useRef();
   const [loading, setLoading] = useState(false)
@@ -24,7 +18,6 @@ export default function ContactMe(props) {
     });
     return () => sub.unsubscribe();
   }, [props.id]);
-  const [result, showResult] = useState(false);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault()
@@ -65,7 +58,6 @@ export default function ContactMe(props) {
       if (response.ok) {
         toast.success('Message was submitted');
         e.target.reset();
-        showResult(true);
       } else {
         toast.error('Message was not submitted');
       }

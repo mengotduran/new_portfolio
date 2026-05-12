@@ -86,7 +86,7 @@ export default function ContactMe(props) {
             {/* <Typical loop={Infinity} steps={["Get In Touch 📧", 1000]} /> */}
             Get In Touch 📧
           </h2>{" "}
-          <a href="#">
+          <a href="/#">
             <i className="fa fa-facebook-square"></i>
           </a>
           <a href="duranmegot801@gmail.com">
@@ -102,7 +102,7 @@ export default function ContactMe(props) {
         <div className="back-form">
           <div className="img-back">
             <h4>Send Your Email Here!</h4>
-            <img src={imgBack} alt="image not found" />
+            <img src={imgBack} alt="mail" />
           </div>
           <form ref={form} onSubmit={sendEmail}>
             <label>Name</label>

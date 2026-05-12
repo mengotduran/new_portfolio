@@ -8,12 +8,6 @@ import ScrollService from "../../utilities/ScrollService";
 import Animations from "../../utilities/Animations";
 import { toast } from "react-toastify";
 
-const Result = () => {
-  return (
-    <p class="msg-status"> Your Message Has been successfully sent. I will contact you soon</p>
-  )
-}
-
 export default function ContactMe(props) {
   const form = useRef();
   const [loading, setLoading] = useState(false)
@@ -24,7 +18,6 @@ export default function ContactMe(props) {
     });
     return () => sub.unsubscribe();
   }, [props.id]);
-  const [result, showResult] = useState(false);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault()
@@ -65,7 +58,6 @@ export default function ContactMe(props) {
       if (response.ok) {
         toast.success('Message was submitted');
         e.target.reset();
-        showResult(true);
       } else {
         toast.error('Message was not submitted');
       }
@@ -86,7 +78,7 @@ export default function ContactMe(props) {
             {/* <Typical loop={Infinity} steps={["Get In Touch 📧", 1000]} /> */}
             Get In Touch 📧
           </h2>{" "}
-          <a href="#">
+          <a href="/#">
             <i className="fa fa-facebook-square"></i>
           </a>
           <a href="duranmegot801@gmail.com">
@@ -102,7 +94,7 @@ export default function ContactMe(props) {
         <div className="back-form">
           <div className="img-back">
             <h4>Send Your Email Here!</h4>
-            <img src={imgBack} alt="image not found" />
+            <img src={imgBack} alt="mail" />
           </div>
           <form ref={form} onSubmit={sendEmail}>
             <label>Name</label>

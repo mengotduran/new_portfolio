@@ -17,9 +17,7 @@ import tabs from "../../../src/Img/Testimonial/tabs.png";
 import stripe from "../../../src/Img/Testimonial/stripe.png";
 import sidebar from "../../../src/Img/Testimonial/sidebar.png";
 import reviews from "../../../src/Img/Testimonial/reviews.png";
-import Eze from "../../../src/Img/Testimonial/eze.png";
 import miq from "../../../src/Img/Testimonial/dina.png";
-import sema01 from "../../../src/Img/Testimonial/sema.png";
 import ecommerce from "../../../src/Img/Testimonial/ecommerce.png";
 import chatbot from "../../../src/Img/Testimonial/chatbot.png";
 

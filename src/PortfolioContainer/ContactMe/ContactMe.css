@@ -117,7 +117,7 @@ form textarea { min-height: 110px; resize: vertical; }
 form button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #FF5823, #F57F17);
+  background: #FF5823;
   color: #fff;
   border: none;
   border-radius: 10px;

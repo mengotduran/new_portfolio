@@ -142,13 +142,13 @@ body {
 
 .highlighted-btn {
   color: #fff;
-  background: linear-gradient(135deg, #FF5823, #F57F17);
+  background: #FF5823;
   box-shadow: 0 4px 15px rgba(255,88,35,0.35);
   animation: pulse-glow 3s ease infinite;
 }
 
 .highlighted-btn:hover {
-  background: linear-gradient(135deg, #F57F17, #FF5823);
+  background: #F57F17;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255,88,35,0.5);
 }

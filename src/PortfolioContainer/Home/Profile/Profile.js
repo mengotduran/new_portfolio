@@ -3,10 +3,10 @@ import './Profile.css';
 import ScrollService from "../../../utilities/ScrollService";
 
 const steps = [
-  "Front End Developer 💻",
-  "React & Next.js Expert ⚛️",
-  "UI/UX Enthusiast 🎨",
-  "TypeScript Developer 🔷",
+  "Software Engineer 💻",
+  "Researcher 🔬",
+  "Artificial Intelligence Systems 🤖",
+  "Machine Learning Engineer 🧠",
   "Cross Platform Dev 🌐",
 ];
 
@@ -74,7 +74,7 @@ export default function Profile() {
                 <span className="cursor" />
               </h1>
               <span className="profile-role-tagline">
-                Building high-quality web applications with precision &amp; passion
+                Building intelligent systems and software with precision &amp; passion
               </span>
             </span>
           </div>

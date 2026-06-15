@@ -80,7 +80,7 @@
 
 .selected-bullet {
   width: 100%;
-  background: linear-gradient(90deg, #FF5823, #F57F17);
+  background: #FF5823;
   color: #fff !important;
 }
 
@@ -159,7 +159,7 @@
 }
 
 .heading-date {
-  background: linear-gradient(135deg, #FF5823, #F57F17);
+  background: #FF5823;
   padding: 3px 10px;
   font-size: 11px;
   border-radius: 12px;
@@ -250,24 +250,13 @@
 .skill-percentage .active-percentage-bar {
   height: 100%;
   border-radius: 4px;
-  background: linear-gradient(90deg, #FF5823, #F57F17);
+  background: #FF5823;
   position: relative;
   width: 0;
 }
 
 .screen-visible .active-percentage-bar {
   animation: fillBar 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.active-percentage-bar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 40px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
-  animation: shimmer 2s ease infinite;
 }
 
 /* ═══════════════════════════════════════
@@ -331,7 +320,7 @@
   }
 
   .selected-bullet {
-    background: linear-gradient(135deg, #FF5823, #F57F17) !important;
+    background: #FF5823 !important;
     color: #fff !important;
   }
 

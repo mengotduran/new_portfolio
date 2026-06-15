@@ -56,13 +56,17 @@ export default function Resume(props) {
   //here we have
   const programmingSkillsDetails = [
     { skill: "JavaScript",        ratingPercentage: 85 },
+    { skill: "Python",            ratingPercentage: 85 },
     { skill: "React JS",          ratingPercentage: 85 },
     { skill: "Next.js",           ratingPercentage: 85 },
     { skill: "TypeScript",        ratingPercentage: 89 },
+    { skill: "PyTorch",           ratingPercentage: 75 },
+    { skill: "Artificial Intelligence", ratingPercentage: 78 },
+    { skill: "Machine Learning",  ratingPercentage: 75 },
+    { skill: "Deep Learning",     ratingPercentage: 70 },
+    { skill: "Natural Language Processing", ratingPercentage: 68 },
     { skill: "HTML & CSS",        ratingPercentage: 90 },
     { skill: "Tailwind CSS",      ratingPercentage: 89 },
-    { skill: "Artificial Intelligence", ratingPercentage: 72 },
-    { skill: "Machine Learning",  ratingPercentage: 68 },
     { skill: "C++",               ratingPercentage: 65 },
     { skill: "C",                 ratingPercentage: 70 },
     { skill: "PHP",               ratingPercentage: 65 },
@@ -123,16 +127,16 @@ export default function Resume(props) {
       <div className="experience-container">
         <ResumeHeading
           heading={"DURAN'S Technoloy"}
-          subHeading={"FRONT END DEVELOPER"}
+          subHeading={"SOFTWARE ENGINEER"}
           fromDate={"2021"}
           toDate={"2024"}
         />
         <div className="experience-description">
           <span className="resume-description-text0">
-            Front End Developer 2021-2023 <a href="https://nobisoft.net/" target="_black">NOBISOFT</a>
+            Software Engineer 2021-2023 <a href="https://nobisoft.net/" target="_black">NOBISOFT</a>
           </span> <br />
           <span className="resume-description-text0">
-            Front End Developer 2023-2024 <a href="https://kaeyros-analytics.com/#/" target="_black">kaeyros-Analytics</a>
+            Software Engineer 2023-2024 <a href="https://kaeyros-analytics.com/#/" target="_black">kaeyros-Analytics</a>
           </span>
         </div>
         <div className="experience-description">

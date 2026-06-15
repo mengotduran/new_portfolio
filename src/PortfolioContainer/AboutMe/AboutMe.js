@@ -5,16 +5,16 @@ import Animations from "../../utilities/Animations";
 import "./AboutMe.css";
 
 const highlights = [
-  "Front End Developer",
-  "Interactive UI from design specs",
+  "Software Engineer",
+  "AI & Machine Learning Researcher",
   "React & Next.js Applications",
   "TypeScript & Vanilla JavaScript",
-  "Tailwind CSS & Advanced UI",
-  "Artificial Intelligence & ML Enthusiast",
+  "PyTorch & Deep Learning",
+  "Artificial Intelligence Systems",
 ];
 
 const description =
-  "Front End Developer with a strong background in Vanilla JavaScript and a knack for building high-performance web applications. Passionate about clean code, intuitive UI, and delivering production-ready solutions that make a real impact.";
+  "Software Engineer and Researcher with a strong background in building intelligent systems and high-performance applications. Passionate about clean code, artificial intelligence, and delivering production-ready solutions that make a real impact.";
 
 export default function AboutMe(props) {
   useEffect(() => {

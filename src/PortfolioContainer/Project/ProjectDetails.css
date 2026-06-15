@@ -1,0 +1,366 @@
+.project-details-container {
+  min-height: 100vh;
+  background: #e8e8e8;
+  color: #000;
+  padding: 24px 16px 80px;
+}
+
+.project-details-topbar {
+  max-width: 860px;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.back-link {
+  color: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #000;
+}
+
+.visit-link {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 24px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.visit-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.coming-soon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+}
+
+.coming-soon-pill:hover {
+  transform: none;
+  opacity: 1;
+}
+
+/* ── Loader (horizontal progress bar, shared) ── */
+.project-loader {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 165, 0, 0.15);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.project-loader::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+  background: #ffa500;
+  border-radius: 3px;
+}
+
+.project-loader.small {
+  width: 40px;
+  height: 4px;
+}
+
+.project-details-content {
+  max-width: 860px;
+  margin: 0 auto 24px;
+  background: #d8d8d8;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-details-content:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Credentials banner (shown right under the link, near the top) ── */
+.credentials-banner {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #dfe6da;
+}
+
+.credentials-banner h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+/* ── Placeholder for in-progress projects (no screenshot yet) ── */
+.project-details-placeholder {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: #2a2d45;
+}
+
+.project-placeholder-text {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Tech stack chips ── */
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-chip {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 16px;
+}
+
+.project-details-image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 420px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.project-details-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.project-details-badge.coming-soon {
+  background: rgba(255, 165, 0, 0.15);
+  border-color: rgba(255, 165, 0, 0.4);
+  color: #c97600;
+}
+
+.project-details-title {
+  margin: 6px 0 4px;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.project-details-tagline {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 1rem;
+  margin: 0 0 18px;
+}
+
+.project-details-overview {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 24px;
+}
+
+.project-details-section {
+  margin-bottom: 24px;
+}
+
+.project-details-section h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.project-details-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-details-features li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.95rem;
+}
+
+.project-details-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.project-credentials-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.project-credential-card {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #e8e8e8;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.credential-role {
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.credential-line {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.project-credentials-note {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-style: italic;
+}
+
+/* ── Dark / color theme ── */
+body.theme-color .project-details-container {
+  background: #1f2235;
+  color: #fff;
+}
+
+body.theme-color .back-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+body.theme-color .back-link:hover {
+  color: #fff;
+}
+
+body.theme-color .visit-link {
+  background: #ff5823;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 88, 35, 0.35);
+}
+
+body.theme-color .project-details-content {
+  background: #252a40;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+}
+
+body.theme-color .project-details-badge {
+  background: rgba(255, 165, 0, 0.2);
+  border-color: rgba(255, 165, 0, 0.5);
+  color: #ffa500;
+}
+
+body.theme-color .project-details-tagline {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+body.theme-color .project-details-overview {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+body.theme-color .project-details-features li {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+body.theme-color .project-details-features li::before {
+  background: #ffa500;
+}
+
+body.theme-color .project-credential-card {
+  background: #1f2235;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.theme-color .credential-role {
+  color: #ffa500;
+}
+
+body.theme-color .credential-line {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+body.theme-color .project-credentials-note {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+body.theme-color .credentials-banner {
+  background: #2f3a30;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+body.theme-color .project-details-badge.coming-soon {
+  background: rgba(255, 165, 0, 0.15);
+  border-color: rgba(255, 165, 0, 0.4);
+  color: #ffa500;
+}
+
+body.theme-color .tech-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 600px) {
+  .project-details-title {
+    font-size: 1.5rem;
+  }
+  .project-details-content {
+    padding: 18px;
+  }
+}

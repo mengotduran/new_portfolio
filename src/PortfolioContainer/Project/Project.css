@@ -1,20 +1,9 @@
 
 .projects-section {
   padding: 60px 0 80px;
-  background: linear-gradient(135deg, #1f2235 0%, #2a2d45 100%);
+  background: #1f2235;
   position: relative;
   overflow: hidden;
-}
-
-.projects-section::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 50%, rgba(255, 165, 0, 0.04) 0%, transparent 60%);
-  pointer-events: none;
 }
 
 /* ── Carousel nav buttons ── */
@@ -160,7 +149,9 @@ button.owl-next:hover {
 
 /* badge shown when there's no description (professional projects) */
 .project-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: rgba(255, 165, 0, 0.2);
   border: 1px solid rgba(255, 165, 0, 0.5);
   color: #ffa500;
@@ -171,6 +162,59 @@ button.owl-next:hover {
   border-radius: 20px;
   text-transform: uppercase;
   margin-bottom: 8px;
+}
+
+.project-badge.coming-soon {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+/* ── Placeholder for in-progress projects (no screenshot yet) ── */
+.project-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: #2a2d45;
+}
+
+.project-placeholder-text {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Loader (horizontal progress bar) ── */
+.project-loader {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 165, 0, 0.15);
+  overflow: hidden;
+}
+
+.project-loader::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+  background: #ffa500;
+  border-radius: 3px;
+}
+
+.project-loader.small {
+  width: 40px;
+  height: 4px;
 }
 
 /* ── Carousel container spacing ── */

@@ -30,7 +30,7 @@ export default function ProjectDetails() {
           >
             Visit Live Site ↗
           </a>
-        ) : (
+        ) : project.storeLinks ? null : (
           <span className="visit-link coming-soon-pill">
             <span className="project-loader small" />
             Coming Soon
@@ -84,6 +84,57 @@ export default function ProjectDetails() {
         <p className="project-details-tagline">{project.tagline}</p>
 
         <p className="project-details-overview">{project.overview}</p>
+
+        {project.storeLinks && (
+          <div className="project-details-section">
+            <h2>Get the App</h2>
+            <div className="project-store-links">
+              {project.storeLinks.map((group, i) => (
+                <div className="store-link-group" key={i}>
+                  <span className="store-link-app-name">{group.app}</span>
+                  <div className="store-link-buttons">
+                    {group.ios && (
+                      <a
+                        href={group.ios}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="store-link-btn"
+                      >
+                        App Store ↗
+                      </a>
+                    )}
+                    {group.android && (
+                      <a
+                        href={group.android}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="store-link-btn"
+                      >
+                        Play Store ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {project.screenshots && (
+          <div className="project-details-section">
+            <h2>Screenshots</h2>
+            <div className="project-screenshot-gallery">
+              {project.screenshots.map((src, i) => (
+                <img
+                  src={src}
+                  alt={`${project.title} screenshot ${i + 1}`}
+                  className="project-screenshot"
+                  key={i}
+                />
+              ))}
+            </div>
+          </div>
+        )}
 
         {project.features && (
           <div className="project-details-section">

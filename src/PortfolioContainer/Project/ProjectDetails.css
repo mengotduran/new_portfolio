@@ -275,6 +275,65 @@
   font-style: italic;
 }
 
+/* ── Store links (multi app / multi platform projects) ── */
+.project-store-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.store-link-group {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #e8e8e8;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.store-link-app-name {
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.store-link-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.store-link-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.store-link-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* ── Screenshot gallery ── */
+.project-screenshot-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.project-screenshot {
+  width: 160px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
 /* ── Dark / color theme ── */
 body.theme-color .project-details-container {
   background: #1f2235;
@@ -354,6 +413,16 @@ body.theme-color .tech-chip {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
+}
+
+body.theme-color .store-link-group {
+  background: #1f2235;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.theme-color .store-link-btn {
+  background: #ff5823;
+  color: #fff;
 }
 
 @media (max-width: 600px) {

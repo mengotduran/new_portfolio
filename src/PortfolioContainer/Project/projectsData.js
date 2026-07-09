@@ -2,8 +2,44 @@ import velocaris from "../../Img/Projects/velocaris.png";
 import reportcard from "../../Img/Projects/reportcard.png";
 import miq from "../../Img/Projects/miq.png";
 import nullpluseins from "../../Img/Projects/nullpluseins.png";
+import motionApp from "../../Img/Projects/motion-app.jpg";
+import motionPro from "../../Img/Projects/motion-pro.jpg";
 
 export const projects = [
+  {
+    id: "motion",
+    title: "Motion App & Motion Pro",
+    tagline: "Ride hailing platform, live in production",
+    description:
+      "Passenger, driver and mechanic apps published on the Play Store and App Store",
+    badge: "Mobile",
+    image: motionApp,
+    screenshots: [motionApp, motionPro],
+    overview:
+      "Motion is a ride hailing platform made up of two published apps: Motion App for passengers and Motion Pro for drivers. Passengers request rides from Motion App, drivers see and accept incoming requests in Motion Pro, and the two apps communicate in real time to match trips, share live driver location and coordinate the ride from pickup to drop off. Motion Pro also has a mechanic role, letting drivers request roadside help without leaving the app.",
+    features: [
+      "Ride request and booking flow for passengers in Motion App",
+      "Real time driver location tracking and trip matching between passenger and driver apps",
+      "Driver side trip management in Motion Pro, from accepting a request through to completing the ride",
+      "Separate mechanic role inside Motion Pro, mechanics list the services they currently offer",
+      "In app mechanic booking for drivers, requests are routed to available mechanics through a dedicated endpoint",
+      "Published and live on both the Apple App Store and Google Play Store",
+    ],
+    storeLinks: [
+      {
+        app: "Motion App (Passenger)",
+        ios: "https://apps.apple.com/us/app/motion-app-easy-ride/id6761183875",
+        android:
+          "https://play.google.com/store/apps/details?id=com.motionride.motionrider",
+      },
+      {
+        app: "Motion Pro (Driver & Mechanic)",
+        ios: "https://apps.apple.com/us/app/motion-pro-driver-app/id6760689314",
+        android:
+          "https://play.google.com/store/apps/details?id=com.motionride.motionride",
+      },
+    ],
+  },
   {
     id: "velocaris",
     title: "Velocaris",
